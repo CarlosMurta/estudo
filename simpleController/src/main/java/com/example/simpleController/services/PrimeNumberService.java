@@ -1,4 +1,4 @@
-//package com.example.simpleController.services;
+package com.example.simpleController.services;
 
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class PrimeNumberService {
 
     public static void main(String[] args){
 
-        int endNumber = 10;
+        int endNumber = 1000;
         int arrayPrime [] = new int[endNumber];
         int i = 1; // Índice da Array
         int x = 3; // Primeiro número a ser testado, até o limite endNumbers.
@@ -26,23 +26,29 @@ public class PrimeNumberService {
 
             n = 2;
 
-            while (n < (x - 1)){
+            while (n < x){
 
-                if ((x % n) != 0){ break; }
+                if ((x % n) == 0){
+
+                    break;
+
+                }
 
                 n++;
 
             }
 
-            if (n == x){ arrayPrime[i] = x; i++; }
+            if (n == x){
+
+                arrayPrime[i] = x; i++;
+
+            }
 
             x++;
 
         }
 
         System.out.println(Arrays.toString(arrayPrime));
-
-
 
         //return Arrays.asList(1,2,3);
 
