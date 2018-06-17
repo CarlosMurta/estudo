@@ -2,55 +2,41 @@ package com.example.simpleController.services;
 
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 //@Service
 public class PrimeNumberService {
 
-//    public List<Integer> findPrimeNumbersUntil(int endNumber){
+    private static List<Integer> findPrimeNumbersUntil(int initNumber, int endNumber){
 
-//        List<Integer> primeNumberList = new ArrayList<>();
+        List primeNumberList = new ArrayList();
 
-    public static void main(String[] args){
+        for (int x = initNumber; x < endNumber; x++){
 
-        int endNumber = 1000;
-        int arrayPrime [] = new int[endNumber];
-        int i = 1; // Índice da Array
-        int x = 3; // Primeiro número a ser testado, até o limite endNumbers.
-        int n = 2; // Primeiro número da divisão para testar o resto.
+            boolean isPrime = true;
 
-        arrayPrime[0] = 2;
-
-        while (x < endNumber){
-
-            n = 2;
-
-            while (n < x){
-
-                if ((x % n) == 0){
-
+            for (int n = 2; n < x; n++){
+                if (x % n == 0) {
+                    isPrime = false;
                     break;
-
                 }
-
-                n++;
-
             }
 
-            if (n == x){
-
-                arrayPrime[i] = x; i++;
-
+            if (isPrime && !(x == 0 || x == 1)) {
+                primeNumberList.add(x);
             }
-
-            x++;
 
         }
 
-        System.out.println(Arrays.toString(arrayPrime));
+        // Tirar o teste de zero e um que se repete várias vezes e colocar o teste aqui, antes de passar o resultado.
 
-        //return Arrays.asList(1,2,3);
+        return primeNumberList;
 
     }
+
+    public static void main(String[] args) {
+        System.out.println(findPrimeNumbersUntil(0, 100));
+    }
+
 }
+
