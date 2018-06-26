@@ -1,41 +1,67 @@
 package com.example.simpleController.services;
 
+import com.example.simpleController.controllers.PrimeNumberController;
+import com.example.simpleController.pojo.PrimeNumberResult;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Service
+@Service
 public class PrimeNumberService {
 
-    private static List<Integer> findPrimeNumbersUntil(int initNumber, int endNumber){
+    private static  List<Integer> findPrimeNumbersUntil(int initNumber, int endNumber){
 
-        List primeNumberList = new ArrayList();
+        List<Integer> primeNumberList = null;
+        String stringTeste = "";
 
-        for (int x = initNumber; x < endNumber; x++){
+        if (initNumber <= endNumber) {
 
-            boolean isPrime = true;
+            primeNumberList = new ArrayList();
 
-            for (int n = 2; n < x; n++){
-                if (x % n == 0) {
-                    isPrime = false;
-                    break;
+            for (int x = initNumber; x <= endNumber; x++) {
+
+                boolean isPrime = true;
+
+                for (int n = 2; n < Math.abs(x); n++) {
+                    if (x % n == 0) {
+                        isPrime = false;
+                        break;
+                    }
+                }
+
+                if (isPrime && !(x == -1 || x == 0 || x == 1)) {
+                    primeNumberList.add(x);
+                    stringTeste = stringTeste + x + ",";
                 }
             }
-
-            if (isPrime && !(x == 0 || x == 1)) {
-                primeNumberList.add(x);
-            }
-
         }
 
-        // Tirar o teste de zero e um que se repete várias vezes e colocar o teste aqui, antes de passar o resultado.
-
-        return primeNumberList;
-
+        return primeNumberList;   // return stringTeste;
     }
 
-    public static void main(String[] args) {
-        System.out.println(findPrimeNumbersUntil(0, 100));
+    public PrimeNumberResult getPrimeNumbersBetween(Integer start, Integer end) {
+
+        PrimeNumberResult primeNumberResult = new PrimeNumberResult();
+
+        List<Integer> primeNumberList = findPrimeNumbersUntil(start, end);
+
+        primeNumberResult.setMessage("Ok. Encontrados " + primeNumberList.size() + " números primos.");
+
+        if(start > end){
+            primeNumberResult.setMessage("Início do intervalo maior que o final!");
+        }
+
+        if(start == end){
+            primeNumberResult.setMessage("O intervalo é nulo!");
+        }
+
+        if (primeNumberList.size() == 0){
+            primeNumberResult.setMessage("Não encontrei primos neste intervalo!");
+        }
+
+        primeNumberResult.setPrimeNumberList(primeNumberList);
+
+        return primeNumberResult;
     }
 
 }
