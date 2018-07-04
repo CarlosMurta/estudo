@@ -15,20 +15,20 @@ public class PersonController
     @Autowired
     private PersonService personService;
 
-    @RequestMapping(value = "persons", method = RequestMethod.GET) //GET, POST, PUT, DELETE //endpoint
+    @RequestMapping(value = "persons", method = RequestMethod.GET)
     public ResponseEntity<Person> person() {
         //chama servi ....
         Person person = personService.createPerson();
         return new ResponseEntity<>(person, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "persons", method = RequestMethod.POST) //GET, POST, PUT, DELETE
+    @RequestMapping(value = "persons", method = RequestMethod.POST)
     public ResponseEntity<Person> person(@RequestBody Person person){
         personService.insertPerson(person);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "persons/{id}", method = RequestMethod.GET) //GET, POST, PUT, DELETE
+    @RequestMapping(value = "persons/{id}", method = RequestMethod.GET)
     public ResponseEntity<Person> person(@PathVariable Integer id){
         System.out.println("Get person: " + id);
         return new ResponseEntity<>(HttpStatus.OK);

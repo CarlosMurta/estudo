@@ -4,8 +4,16 @@ import java.util.List;
 
 public class PrimeNumberResult {
 
-    private List<Integer> primeNumberList;
     private String message;
+    private List<Integer> primeNumberList;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
     public List<Integer> getPrimeNumberList() {
         return primeNumberList;
@@ -15,11 +23,4 @@ public class PrimeNumberResult {
         this.primeNumberList = primeNumberList;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 }

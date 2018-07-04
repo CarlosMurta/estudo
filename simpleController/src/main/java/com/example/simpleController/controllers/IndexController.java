@@ -13,7 +13,7 @@ public class IndexController {
     @Value("${looqbox.name}")
     private String name;
 
-    @RequestMapping(value = {"index", "/"}, method = RequestMethod.GET) //GET, POST, PUT, DELETE
+    @RequestMapping(value = {"index", "/"}, method = RequestMethod.GET)
     public ResponseEntity<String> person(){
         String text = "Welcome to " + name;
         return new ResponseEntity<>(text, HttpStatus.OK);

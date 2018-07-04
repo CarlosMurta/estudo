@@ -1,6 +1,5 @@
 package com.example.simpleController.controllers;
 
-import com.example.simpleController.pojo.Person;
 import com.example.simpleController.pojo.PrimeNumberResult;
 import com.example.simpleController.services.PrimeNumberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +16,8 @@ public class PrimeNumberController {
     @Autowired
     private PrimeNumberService primeNumberService;
 
-    @RequestMapping(value = "prime/{start}/{end}", method = RequestMethod.GET)
-    public ResponseEntity<PrimeNumberResult> person(@PathVariable Integer start, @PathVariable Integer end) {
+    @RequestMapping(value = "primenumbers/{start}/{end}", method = RequestMethod.GET)
+    public ResponseEntity<PrimeNumberResult> iniciar(@PathVariable Integer start, @PathVariable Integer end) {
 
         PrimeNumberResult primeNumberResult = primeNumberService.getPrimeNumbersBetween(start, end);
 

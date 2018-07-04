@@ -1,6 +1,5 @@
 package com.example.simpleController.services;
 
-import com.example.simpleController.controllers.PrimeNumberController;
 import com.example.simpleController.pojo.PrimeNumberResult;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -9,60 +8,51 @@ import java.util.List;
 @Service
 public class PrimeNumberService {
 
-    private static  List<Integer> findPrimeNumbersUntil(int initNumber, int endNumber){
+    public PrimeNumberResult getPrimeNumbersBetween(Integer initNumber, Integer endNumber) {
 
-        List<Integer> primeNumberList = null;
-        String stringTeste = "";
+        String vrMensagem;
+        List<Integer> primeNumberList = new ArrayList();
 
-        if (initNumber <= endNumber) {
+       if (initNumber > endNumber) {
 
-            primeNumberList = new ArrayList();
+            vrMensagem = "Início do intervalo maior que o final!";
 
-            for (int x = initNumber; x <= endNumber; x++) {
+        } else {
+
+            for (int vrValor = initNumber; vrValor <= endNumber; vrValor++) {
 
                 boolean isPrime = true;
 
-                for (int n = 2; n < Math.abs(x); n++) {
-                    if (x % n == 0) {
+                for (int n = 2; n <= Math.round(Math.sqrt(Math.abs(vrValor))); n++) {
+                    if (vrValor % n == 0) {
                         isPrime = false;
                         break;
                     }
                 }
 
-                if (isPrime && !(x == -1 || x == 0 || x == 1)) {
-                    primeNumberList.add(x);
-                    stringTeste = stringTeste + x + ",";
+                if (isPrime && !(vrValor == -1 || vrValor == 0 || vrValor == 1)) {
+                    primeNumberList.add(vrValor);
                 }
             }
-        }
 
-        return primeNumberList;   // return stringTeste;
-    }
+            if (primeNumberList.size() == 0) {
+                vrMensagem = "Não encontrei primos neste intervalo!";
+            } else {
+                if (primeNumberList.size() == 1) {
+                    vrMensagem = "Encontrado 1 número primo neste intervalor.";
+                } else {
+                    vrMensagem = "Encontrados " + primeNumberList.size() + " números primos neste intervalor.";
+                }
+            }
 
-    public PrimeNumberResult getPrimeNumbersBetween(Integer start, Integer end) {
+       }
 
         PrimeNumberResult primeNumberResult = new PrimeNumberResult();
 
-        List<Integer> primeNumberList = findPrimeNumbersUntil(start, end);
-
-        primeNumberResult.setMessage("Ok. Encontrados " + primeNumberList.size() + " números primos.");
-
-        if(start > end){
-            primeNumberResult.setMessage("Início do intervalo maior que o final!");
-        }
-
-        if(start == end){
-            primeNumberResult.setMessage("O intervalo é nulo!");
-        }
-
-        if (primeNumberList.size() == 0){
-            primeNumberResult.setMessage("Não encontrei primos neste intervalo!");
-        }
-
+        primeNumberResult.setMessage(vrMensagem);
         primeNumberResult.setPrimeNumberList(primeNumberList);
 
         return primeNumberResult;
     }
 
 }
-
